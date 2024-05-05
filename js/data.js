@@ -1,4 +1,4 @@
-import { getRandomArrayElement, getRandomInteger } from './util';
+import { getRandomArrayElement, getRandomInteger } from './util.js';
 
 const DESCRIPTION = [
   'Это я в дубае',
@@ -20,6 +20,15 @@ const NAME = [
   'Виктор',
 ];
 
+const generateComment = (index) => ({
+  commentsId: index,
+  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  commentsMessage:  getRandomArrayElement(MESSAGE),
+  commentsName: getRandomArrayElement(NAME),
+});
+
+const generateComments = (count) => Array.from({length: count}, (_, index) => generateComment(++index));
+
 /**
  *
  * @param {Number} index - число, с каждым последующим вызовом, увеличивающееся на 1
@@ -30,13 +39,7 @@ const generatePhoto = (index) => ({
   addressUrl: `photos/${index}.jpg`,
   photoDescription: getRandomArrayElement(DESCRIPTION),
   quantityLikes: getRandomInteger(15, 200),
-  comments: [{
-    commentsId: index,
-    Avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-    commentsMessage:  getRandomArrayElement(MESSAGE),
-    commentsName: getRandomArrayElement(NAME),
-  }
-  ],
+  comments: generateComments(getRandomInteger(0, 30)),
 });
 
 /**
@@ -46,4 +49,4 @@ const generatePhoto = (index) => ({
  */
 const generatePhotos = (count) => Array.from({length: count}, (_, index) => generatePhoto(++index));
 
-export {generatePhotos};
+export { generatePhotos };
