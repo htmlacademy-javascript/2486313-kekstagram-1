@@ -12,6 +12,7 @@
     name - набор имён для комментаторов составьте сами. Подставить любое имя.
 */
 
-import { generatePhotos } from './data';
+import { generatePhotos } from './data.js';
+import { renderThumbnails } from './render-photos.js';
 
-console.log(generatePhotos(25));
+renderThumbnails(generatePhotos(25));
