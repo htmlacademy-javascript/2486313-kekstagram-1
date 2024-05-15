@@ -1,6 +1,8 @@
-import { openBigPicture } from './big-photo.js';
+import { openBigPicture, closeBigPhoto } from './big-photo.js';
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
+const bigPictureCancel = document.querySelector('.big-picture__cancel');
+
 
 /**
  *
@@ -18,6 +20,16 @@ const createPublication = ({url, description, comments, likes}) => {
   publication.querySelector('.picture__likes').textContent = likes;
   publication.addEventListener('click', () => {
     openBigPicture({url, description, comments, likes});
+  });
+
+  publication.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closeBigPhoto();
+    }
+  });
+
+  bigPictureCancel.addEventListener('click', ()=> {
+    closeBigPhoto();
   });
 
   return publication;
