@@ -21,10 +21,10 @@ const NAME = [
 ];
 
 const generateComment = (index) => ({
-  commentsId: index,
+  id: index,
   avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-  commentsMessage:  getRandomArrayElement(MESSAGE),
-  commentsName: getRandomArrayElement(NAME),
+  message:  getRandomArrayElement(MESSAGE),
+  name: getRandomArrayElement(NAME),
 });
 
 const generateComments = (count) => Array.from({length: count}, (_, index) => generateComment(++index));
@@ -35,10 +35,10 @@ const generateComments = (count) => Array.from({length: count}, (_, index) => ge
  * @returns {object} - объект-фотография
  */
 const generatePhoto = (index) => ({
-  photoId: index,
-  addressUrl: `photos/${index}.jpg`,
-  photoDescription: getRandomArrayElement(DESCRIPTION),
-  quantityLikes: getRandomInteger(15, 200),
+  id: index,
+  url: `photos/${index}.jpg`,
+  description: getRandomArrayElement(DESCRIPTION),
+  likes: getRandomInteger(15, 200),
   comments: generateComments(getRandomInteger(0, 30)),
 });
 
