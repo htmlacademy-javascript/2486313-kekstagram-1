@@ -7,7 +7,7 @@ const commentCount = document.querySelector('.social__comment-count');
 const containerComments = document.querySelector('.social__comments');
 const commentElement = document.querySelector('.social__comment');
 const commentsCount = document.querySelector('.comments-count');
-const commentLoader = document.querySelector('.comments-loader');
+const commentsLoader = document.querySelector('.comments-loader');
 
 /**
  * отрисовывает комментарии в попапе
@@ -36,7 +36,7 @@ const openBigPicture = ({url, description, comments, likes}) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   commentCount.classList.add('hidden');
-  commentLoader.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
 
   bigPictureImg.querySelector('img').src = url;
   likesCount.textContent = likes;
