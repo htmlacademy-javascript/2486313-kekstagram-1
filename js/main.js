@@ -14,5 +14,6 @@
 
 import { generatePhotos } from './data.js';
 import { renderThumbnails } from './render-photos.js';
+import './new-publication.js';
 
 renderThumbnails(generatePhotos(25));
