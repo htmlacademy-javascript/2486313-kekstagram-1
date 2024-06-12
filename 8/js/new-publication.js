@@ -53,6 +53,7 @@ const defaultImgElement = () => {
   imageElement.style.transform = 'scale(1)';
   imageElement.classList.remove(currentEffect);
   imageElement.classList.add('effects__preview--none');
+  controlValue.value = '100%';
 };
 
 uploadLogo.addEventListener('change', () => {
