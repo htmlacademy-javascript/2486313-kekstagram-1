@@ -1,4 +1,5 @@
 import './validate-form.js';
+import './slider-form.js';
 const uploadLogo = document.querySelector('#upload-file');
 const imageEditor = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
@@ -6,7 +7,7 @@ const uploadCancel = document.querySelector('#upload-cancel');
 const controlSmaller = document.querySelector('.scale__control--smaller');
 const controlBigger = document.querySelector('.scale__control--bigger');
 const controlValue = document.querySelector('.scale__control--value');
-const imageElement = document.querySelector('.img-upload__preview');
+const image = document.querySelector('.img-upload__preview');
 const effectsRadio = document.querySelectorAll('.effects__radio');
 const fieldHashtags = document.querySelector('.text__hashtags');
 const fieldComments = document.querySelector('.text__description');
@@ -18,7 +19,7 @@ const STEP_VALUE = 25;
 const addEffect = (effect) => `${'effects__preview--'}${effect.value}` ;
 
 const changeScale = (value) => {
-  imageElement.style.transform = `scale(${value / 100})`;
+  image.style.transform = `scale(${value / 100})`;
   controlValue.value = `${value}%`;
 };
 
@@ -37,22 +38,22 @@ const closeDocumentKeydown = (evt) => {
 let currentEffect = '';
 effectsRadio.forEach((effect) => {
   effect.addEventListener('click', () => {
-    imageElement.classList.remove('effects__preview--chrome');
-    imageElement.classList.remove('effects__preview--none');
-    imageElement.classList.remove('effects__preview--sepia');
-    imageElement.classList.remove('effects__preview--marvin');
-    imageElement.classList.remove('effects__preview--phobos');
-    imageElement.classList.remove('effects__preview--heat');
+    image.classList.remove('effects__preview--chrome');
+    image.classList.remove('effects__preview--none');
+    image.classList.remove('effects__preview--sepia');
+    image.classList.remove('effects__preview--marvin');
+    image.classList.remove('effects__preview--phobos');
+    image.classList.remove('effects__preview--heat');
     currentEffect = addEffect(effect);
-    imageElement.classList.add(currentEffect);
+    image.classList.add(currentEffect);
   });
   return currentEffect;
 });
 
 const defaultImgElement = () => {
-  imageElement.style.transform = 'scale(1)';
-  imageElement.classList.remove(currentEffect);
-  imageElement.classList.add('effects__preview--none');
+  image.style.transform = 'scale(1)';
+  image.classList.remove(currentEffect);
+  image.classList.add('effects__preview--none');
   controlValue.value = '100%';
 };
 
@@ -60,6 +61,7 @@ uploadLogo.addEventListener('change', () => {
   imageEditor.classList.remove('hidden');
   body.classList.add('modal-open');
   defaultImgElement();
+  closeDocumentKeydown();
 });
 
 uploadCancel.addEventListener('click', () => {
