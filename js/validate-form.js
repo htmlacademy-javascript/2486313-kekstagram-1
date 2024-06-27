@@ -1,11 +1,9 @@
 const form = document.querySelector('.img-upload__form');
 const fieldHashtags = document.querySelector('.text__hashtags');
-const fieldComments = document.querySelector('.text__description');
 const HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_COUNT_HASHTAG_LENGTH = 20;
 const MAX_COUNT_HASHTAG = 5;
 const errorMessage = 'Поле заполнено неправильно!';
-
 
 
 const pristine = new Pristine(form, {
