@@ -1,25 +1,5 @@
 import { getRandomArrayElement, getRandomInteger } from './util.js';
 
-const DESCRIPTION = [
-  'Это я в дубае',
-  'Это мои ноги',
-  'this is my friends',
-  'Это олег',
-];
-
-const MESSAGE = [
-  'Всё отлично!',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-];
-
-const NAME = [
-  'Петя',
-  'Вася',
-  'Паша',
-  'Вова',
-  'Виктор',
-];
-
 const generateComment = (index) => ({
   id: index,
   avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,

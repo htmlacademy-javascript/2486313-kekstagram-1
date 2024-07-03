@@ -1,5 +1,4 @@
-import './validate-form.js';
-import './slider-form.js';
+
 const uploadLogo = document.querySelector('#upload-file');
 const imageEditor = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
@@ -11,6 +10,7 @@ const image = document.querySelector('.img-upload__preview');
 const effectsRadio = document.querySelectorAll('.effects__radio');
 const fieldHashtags = document.querySelector('.text__hashtags');
 const fieldComments = document.querySelector('.text__description');
+const containerSlider = document.querySelector('.img-upload__effect-level');
 const MIN_VALUE = 25;
 const MAX_VALUE = 100;
 const STEP_VALUE = 25;
@@ -47,14 +47,15 @@ effectsRadio.forEach((effect) => {
     currentEffect = addEffect(effect);
     image.classList.add(currentEffect);
   });
-  return currentEffect;
 });
 
 const defaultImgElement = () => {
   image.style.transform = 'scale(1)';
   image.classList.remove(currentEffect);
   image.classList.add('effects__preview--none');
-  controlValue.value = '100%';
+  controlValue.value = `${100}%`;
+  image.style.filter = '';
+  containerSlider.classList.add('hidden');
 };
 
 uploadLogo.addEventListener('change', () => {
@@ -101,3 +102,5 @@ fieldHashtags.addEventListener('blur', () => {
 fieldComments.addEventListener('blur', () => {
   document.addEventListener('keydown', closeDocumentKeydown);
 });
+
+export {hiddenWindowPublication};
