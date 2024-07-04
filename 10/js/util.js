@@ -1,3 +1,31 @@
+import { defaultImgElement } from './new-publication.js';
+const errorMessage = document.querySelector('#error').content.querySelector('.error');
+const body = document.querySelector('body');
+const successMessage = document.querySelector('#success').content.querySelector('.success');
+
+const hiddenPopup = (popup) => {
+  popup.classList.add('hidden');
+};
+
+
+const closePopupSuccess = ((popup) => {
+  window.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      hiddenPopup(popup);
+      defaultImgElement();
+    }
+  });
+});
+
+const closePopupError = ((popup) => {
+  window.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      hiddenPopup(popup);
+      defaultImgElement();
+    }
+  });
+});
+
 /**
  * Выбирает рандомное число из диапозона
  * @param {Number} a - начальное значение
@@ -42,4 +70,26 @@ const showAlert = (message) => {
   }, 5000);
 };
 
-export {showAlert};
+const showAlerts = (error = null) => {
+  if (error) {
+    const cloneErrorMessage = errorMessage.cloneNode(true);
+    body.appendChild(cloneErrorMessage);
+    closePopupError(cloneErrorMessage);
+    cloneErrorMessage.querySelector('.error__button').addEventListener('click', () => {
+      hiddenPopup(cloneErrorMessage);
+      defaultImgElement();
+    });
+  } else {
+    const cloneSuccessMessage = successMessage.cloneNode(true);
+    body.appendChild(cloneSuccessMessage);
+    closePopupSuccess(cloneSuccessMessage);
+    cloneSuccessMessage.querySelector('.success__button').addEventListener('click', () => {
+      hiddenPopup(cloneSuccessMessage);
+      defaultImgElement();
+    });
+  }
+  return body;
+};
+
+
+export {showAlerts, showAlert};

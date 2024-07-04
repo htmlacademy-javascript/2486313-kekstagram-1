@@ -1,5 +1,5 @@
 
-const BUSE_URL = 'https://28.javascript.htmlacademy.pro/kekstagram';
+const BASE_URL = 'https://28.javascript.htmlacademy.pro/kekstagram';
 const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/'
@@ -15,8 +15,8 @@ const ErrorText = {
   SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
 };
 
-const load = (route, errorText, method = Method.GET, body = null) => {
-  fetch((`${BUSE_URL}${route}`), { method, body})
+const load = (route, errorText, method = Method.GET, body = null) =>
+  fetch((`${BASE_URL}${route}`), { method, body})
     .then((response) => {
       if (!response.ok) {
         throw new Error();
@@ -26,7 +26,6 @@ const load = (route, errorText, method = Method.GET, body = null) => {
     .catch(() => {
       throw new Error(errorText);
     });
-};
 
 const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
 
