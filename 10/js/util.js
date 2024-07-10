@@ -3,29 +3,6 @@ const errorMessage = document.querySelector('#error').content.querySelector('.er
 const body = document.querySelector('body');
 const successMessage = document.querySelector('#success').content.querySelector('.success');
 
-const hiddenPopup = (popup) => {
-  popup.classList.add('hidden');
-};
-
-
-const closePopupSuccess = ((popup) => {
-  window.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      hiddenPopup(popup);
-      defaultImgElement();
-    }
-  });
-});
-
-const closePopupError = ((popup) => {
-  window.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      hiddenPopup(popup);
-      defaultImgElement();
-    }
-  });
-});
-
 /**
  * Выбирает рандомное число из диапозона
  * @param {Number} a - начальное значение
@@ -46,10 +23,7 @@ const getRandomInteger = (a, b) => {
  */
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export {getRandomArrayElement, getRandomInteger};
-
-
-const showAlert = (message) => {
+const showAlertError = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
@@ -70,26 +44,62 @@ const showAlert = (message) => {
   }, 5000);
 };
 
-const showAlerts = (error = null) => {
+
+const hiddenPopup = () => {
+  const success = document.querySelector('.success');
+  if (success) {
+    success.remove();
+  }
+};
+
+
+const closePopupByEscape = (() => {
+  window.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      hiddenPopup();
+      defaultImgElement();
+    }
+  });
+});
+
+const showAlert = (error = null) => {
+  const cloneSuccessMessage = successMessage.cloneNode(true);
+  const cloneErrorMessage = errorMessage.cloneNode(true);
+
+  const callbackShowAlerts = (evt) => {
+    if (evt.target.className !== 'success__inner') {
+      if (evt.target.className === 'success__title') {
+        evt.stopImmediatePropagation();
+      } else {
+        hiddenPopup();
+        window.removeEventListener('click', callbackShowAlerts);
+      }
+    }
+  };
+  window.addEventListener('click', callbackShowAlerts);
+
   if (error) {
-    const cloneErrorMessage = errorMessage.cloneNode(true);
     body.appendChild(cloneErrorMessage);
-    closePopupError(cloneErrorMessage);
+    closePopupByEscape(cloneErrorMessage);
+
     cloneErrorMessage.querySelector('.error__button').addEventListener('click', () => {
-      hiddenPopup(cloneErrorMessage);
+      hiddenPopup();
       defaultImgElement();
     });
   } else {
-    const cloneSuccessMessage = successMessage.cloneNode(true);
     body.appendChild(cloneSuccessMessage);
-    closePopupSuccess(cloneSuccessMessage);
+    closePopupByEscape(cloneSuccessMessage);
+
     cloneSuccessMessage.querySelector('.success__button').addEventListener('click', () => {
-      hiddenPopup(cloneSuccessMessage);
+      hiddenPopup();
       defaultImgElement();
     });
+
+
   }
+
   return body;
 };
 
 
-export {showAlerts, showAlert};
+export { showAlert, showAlertError, getRandomArrayElement, getRandomInteger };
