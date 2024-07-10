@@ -1,5 +1,5 @@
 import { sendData } from './api.js';
-import {showAlerts} from './util.js';
+import { showAlert } from './util.js';
 const form = document.querySelector('.img-upload__form');
 const fieldHashtags = document.querySelector('.text__hashtags');
 const submitButton = document.querySelector('.social__footer-btn');
@@ -70,11 +70,11 @@ const setUserFormSubmit = (onSuccess) => {
       blockSubmitButton();
       sendData(new FormData(evt.target))
         .then(() => {
-          showAlerts();
+          showAlert();
           onSuccess();
         })
         .catch((error) => {
-          showAlerts(error);
+          showAlert(error);
         })
         .finally(unblockSubmitButton());
     }

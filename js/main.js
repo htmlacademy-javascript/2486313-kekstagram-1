@@ -19,13 +19,13 @@ import './validate-form.js';
 import './slider-form.js';
 import { setUserFormSubmit } from './validate-form.js';
 import { hiddenWindowPublication } from './new-publication.js';
-import { showAlert } from './util.js';
+import { showAlertError } from './util.js';
 
 getData()
   .then((photoData) => {
     renderThumbnails(photoData);
   })
   .catch((err) => {
-    showAlert(err.message);
+    showAlertError(err.message);
   });
 setUserFormSubmit(hiddenWindowPublication);
