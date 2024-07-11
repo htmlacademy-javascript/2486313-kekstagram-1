@@ -2,7 +2,7 @@ import { openBigPicture, closeBigPhoto } from './big-photo.js';
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
-
+const imgFilters = document.querySelector('.img-filters');
 
 /**
  *
@@ -47,6 +47,7 @@ const renderThumbnails = function (pictures) {
     fragment.append(thumbnail);
   });
   container.append(fragment);
+  imgFilters.classList.remove('img-filters--inactive');
 };
 
 export { renderThumbnails };

@@ -81,7 +81,6 @@ const showAlert = (error = null) => {
   if (error) {
     body.appendChild(cloneErrorMessage);
     closePopupByEscape(cloneErrorMessage);
-
     cloneErrorMessage.querySelector('.error__button').addEventListener('click', () => {
       hiddenPopup();
       defaultImgElement();
@@ -89,15 +88,11 @@ const showAlert = (error = null) => {
   } else {
     body.appendChild(cloneSuccessMessage);
     closePopupByEscape(cloneSuccessMessage);
-
     cloneSuccessMessage.querySelector('.success__button').addEventListener('click', () => {
       hiddenPopup();
       defaultImgElement();
     });
-
-
   }
-
   return body;
 };
 
