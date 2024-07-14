@@ -12,8 +12,20 @@
     name - набор имён для комментаторов составьте сами. Подставить любое имя.
 */
 
-import { generatePhotos } from './data.js';
 import { renderThumbnails } from './render-photos.js';
 import './new-publication.js';
+import { getData } from './api.js';
+import './validate-form.js';
+import './slider-form.js';
+import { setUserFormSubmit } from './validate-form.js';
+import { hiddenWindowPublication } from './new-publication.js';
+import { showAlertError } from './util.js';
 
-renderThumbnails(generatePhotos(25));
+getData()
+  .then((photoData) => {
+    renderThumbnails(photoData);
+  })
+  .catch((err) => {
+    showAlertError(err.message);
+  });
+setUserFormSubmit(hiddenWindowPublication);
