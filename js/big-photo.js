@@ -49,6 +49,7 @@ const openBigPicture = ({url, description, comments, likes}) => {
 
 const closeBigPhoto = (() => {
   bigPicture.classList.add('hidden');
+  body.classList.remove('modal-open');
 });
 
 

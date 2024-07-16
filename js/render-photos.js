@@ -4,6 +4,7 @@ const container = document.querySelector('.pictures');
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
 const imgFilters = document.querySelector('.img-filters');
 
+
 /**
  *
  * @param {string} url - адрес url (путь к изображению)
@@ -22,7 +23,7 @@ const createPublication = ({url, description, comments, likes}) => {
     openBigPicture({url, description, comments, likes});
   });
 
-  publication.addEventListener('keydown', (evt) => {
+  window.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       closeBigPhoto();
     }
@@ -41,10 +42,14 @@ const createPublication = ({url, description, comments, likes}) => {
  */
 const renderThumbnails = function (pictures) {
   const fragment = document.createDocumentFragment();
-
-  pictures.forEach((picture) => {
-    const thumbnail = createPublication(picture);
-    fragment.append(thumbnail);
+  pictures
+    .forEach((picture) => {
+      const thumbnail = createPublication(picture);
+      fragment.append(thumbnail);
+    });
+  const renderPublication = document.querySelectorAll('.picture');
+  renderPublication.forEach((publication) => {
+    publication.remove();
   });
   container.append(fragment);
   imgFilters.classList.remove('img-filters--inactive');
