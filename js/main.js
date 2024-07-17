@@ -11,7 +11,7 @@
     message — взять одно или два случайных предложения из представленных.
     name - набор имён для комментаторов составьте сами. Подставить любое имя.
 */
-
+import {addListenerByfilter} from './filters-publication.js';
 import { renderThumbnails } from './render-photos.js';
 import './new-publication.js';
 import { getData } from './api.js';
@@ -24,6 +24,7 @@ import { showAlertError } from './util.js';
 getData()
   .then((photoData) => {
     renderThumbnails(photoData);
+    addListenerByfilter(photoData);
   })
   .catch((err) => {
     showAlertError(err.message);
