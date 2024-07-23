@@ -20,6 +20,8 @@ import './slider-form.js';
 import { setUserFormSubmit } from './validate-form.js';
 import { hiddenWindowPublication } from './new-publication.js';
 import { showAlertError } from './util.js';
+import './avatar.js';
+
 
 getData()
   .then((photoData) => {

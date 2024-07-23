@@ -49,7 +49,7 @@ effectsRadio.forEach((effect) => {
   });
 });
 
-const defaultImgElement = () => {
+const getInitiallyImgElement = () => {
   image.style.transform = 'scale(1)';
   if (currentEffect) {
     image.classList.remove(currentEffect);
@@ -69,7 +69,7 @@ const defaultImgElement = () => {
 uploadLogo.addEventListener('change', () => {
   imageEditor.classList.remove('hidden');
   body.classList.add('modal-open');
-  defaultImgElement();
+  getInitiallyImgElement();
 });
 
 uploadCancel.addEventListener('click', () => {
@@ -110,4 +110,4 @@ fieldComments.addEventListener('blur', () => {
   document.addEventListener('keydown', closeDocumentKeydown);
 });
 
-export {hiddenWindowPublication, defaultImgElement};
+export {hiddenWindowPublication, getInitiallyImgElement};

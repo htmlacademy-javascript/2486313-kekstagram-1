@@ -11,7 +11,7 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const switchButtonFilters = (activeFilter, pictureData) => {
+const determineButtonFilters = (activeFilter, pictureData) => {
   filtersButtons.forEach((filter) => {
     filter.classList.remove('img-filters__button--active');
   });
@@ -29,10 +29,10 @@ const switchButtonFilters = (activeFilter, pictureData) => {
 
 const addListenerByfilter = (pictureData) => {
   filtersButtons.forEach((button) => {
-    button.addEventListener('click', debounce(() => switchButtonFilters(button, pictureData)), RERENDER_DELAY);
+    button.addEventListener('click', debounce(() => determineButtonFilters(button, pictureData)), RERENDER_DELAY);
   });
 };
 
-export { switchButtonFilters, addListenerByfilter };
+export { addListenerByfilter };
 
 

@@ -1,8 +1,8 @@
-import { defaultImgElement } from './new-publication.js';
+import { getInitiallyImgElement } from './new-publication.js';
 const errorMessage = document.querySelector('#error').content.querySelector('.error');
 const body = document.querySelector('body');
 const successMessage = document.querySelector('#success').content.querySelector('.success');
-
+const ALERT_SHOW_TIME = 5000;
 /**
  * Выбирает рандомное число из диапозона
  * @param {Number} a - начальное значение
@@ -41,7 +41,7 @@ const showAlertError = (message) => {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, 5000);
+  }, ALERT_SHOW_TIME);
 };
 
 
@@ -57,7 +57,7 @@ const closePopupByEscape = (() => {
   window.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       hiddenPopup();
-      defaultImgElement();
+      getInitiallyImgElement();
     }
   });
 });
@@ -83,14 +83,14 @@ const showAlert = (error = null) => {
     closePopupByEscape(cloneErrorMessage);
     cloneErrorMessage.querySelector('.error__button').addEventListener('click', () => {
       hiddenPopup();
-      defaultImgElement();
+      getInitiallyImgElement();
     });
   } else {
     body.appendChild(cloneSuccessMessage);
     closePopupByEscape(cloneSuccessMessage);
     cloneSuccessMessage.querySelector('.success__button').addEventListener('click', () => {
       hiddenPopup();
-      defaultImgElement();
+      getInitiallyImgElement();
     });
   }
   return body;
@@ -114,26 +114,26 @@ function debounce (callback, timeoutDelay = 500) {
   };
 }
 
-function throttle (callback, delayBetweenFrames) {
-  // Используем замыкания, чтобы время "последнего кадра" навсегда приклеилось
-  // к возвращаемой функции с условием, тогда мы его сможем перезаписывать
-  let lastTime = 0;
+// function throttle (callback, delayBetweenFrames) {
+//   // Используем замыкания, чтобы время "последнего кадра" навсегда приклеилось
+//   // к возвращаемой функции с условием, тогда мы его сможем перезаписывать
+//   let lastTime = 0;
 
-  return (...rest) => {
-    // Получаем текущую дату в миллисекундах,
-    // чтобы можно было в дальнейшем
-    // вычислять разницу между кадрами
-    const now = new Date();
+//   return (...rest) => {
+//     // Получаем текущую дату в миллисекундах,
+//     // чтобы можно было в дальнейшем
+//     // вычислять разницу между кадрами
+//     const now = new Date();
 
-    // Если время между кадрами больше задержки,
-    // вызываем наш колбэк и перезаписываем lastTime
-    // временем "последнего кадра"
-    if (now - lastTime >= delayBetweenFrames) {
-      callback.apply(this, rest);
-      lastTime = now;
-    }
-  };
-}
+//     // Если время между кадрами больше задержки,
+//     // вызываем наш колбэк и перезаписываем lastTime
+//     // временем "последнего кадра"
+//     if (now - lastTime >= delayBetweenFrames) {
+//       callback.apply(this, rest);
+//       lastTime = now;
+//     }
+//   };
+// }
 
 const getQuantityComments = (publication) => {
   const comments = publication.comments;
@@ -148,4 +148,4 @@ const comparePublicationComments = (publicationA, publicationB) => {
 };
 
 
-export { showAlert, showAlertError, getRandomArrayElement, getRandomInteger, throttle, debounce, comparePublicationComments };
+export { showAlert, showAlertError, getRandomArrayElement, getRandomInteger, debounce, comparePublicationComments };
