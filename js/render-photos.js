@@ -29,7 +29,7 @@ const createPublication = ({url, description, comments, likes}) => {
     }
   });
 
-  bigPictureCancel.addEventListener('click', ()=> {
+  bigPictureCancel.addEventListener('click', () => {
     closeBigPhoto();
   });
 
