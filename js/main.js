@@ -18,7 +18,7 @@ import { getData } from './api.js';
 import './validate-form.js';
 import './slider-form.js';
 import { setUserFormSubmit } from './validate-form.js';
-import { hiddenWindowPublication } from './new-publication.js';
+import { closeWindowPublication } from './new-publication.js';
 import { showAlertError } from './util.js';
 import './avatar.js';
 
@@ -31,4 +31,4 @@ getData()
   .catch((err) => {
     showAlertError(err.message);
   });
-setUserFormSubmit(hiddenWindowPublication);
+setUserFormSubmit(closeWindowPublication);

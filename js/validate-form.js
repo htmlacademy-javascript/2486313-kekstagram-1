@@ -19,7 +19,7 @@ const pristine = new Pristine(form, {
   errorClass: 'img-upload__field-wrapper--error',
 });
 
-const validTag = (tag) => HASHTAG.test(tag);
+const validateTag = (tag) => HASHTAG.test(tag);
 /**
  * проверяет длину одного тега
  * @param {String} tag
@@ -39,7 +39,7 @@ const checkUniqueTags = (tags) => {
 
 const validateTags = (value) => {
   const tags = value.trim().split(' ').filter((tag) => tag.trim().length);
-  return checkUniqueTags(tags) && checkLengthTag(tags) && tags.every(validTag) && (tags.length <= MAX_COUNT_HASHTAG);
+  return checkUniqueTags(tags) && checkLengthTag(tags) && tags.every(validateTag) && (tags.length <= MAX_COUNT_HASHTAG);
 };
 
 pristine.addValidator(
@@ -81,4 +81,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export {setUserFormSubmit};
+export {setUserFormSubmit, pristine};
