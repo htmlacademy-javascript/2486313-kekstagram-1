@@ -45,10 +45,13 @@ const showAlertError = (message) => {
 };
 
 
-const hiddenPopup = () => {
+const closePopup = () => {
   const success = document.querySelector('.success');
+  const error = document.querySelector('.error');
   if (success) {
     success.remove();
+  } else if (error) {
+    error.remove();
   }
 };
 
@@ -56,7 +59,7 @@ const hiddenPopup = () => {
 const closePopupByEscape = (() => {
   window.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
-      hiddenPopup();
+      closePopup();
       getInitiallyImgElement();
     }
   });
@@ -66,33 +69,44 @@ const showAlert = (error = null) => {
   const cloneSuccessMessage = successMessage.cloneNode(true);
   const cloneErrorMessage = errorMessage.cloneNode(true);
 
-  const callbackShowAlerts = (evt) => {
-    if (evt.target.className !== 'success__inner') {
-      if (evt.target.className === 'success__title') {
-        evt.stopImmediatePropagation();
-      } else {
-        hiddenPopup();
-        window.removeEventListener('click', callbackShowAlerts);
-      }
-    }
-  };
-  window.addEventListener('click', callbackShowAlerts);
-
   if (error) {
     body.appendChild(cloneErrorMessage);
     closePopupByEscape(cloneErrorMessage);
     cloneErrorMessage.querySelector('.error__button').addEventListener('click', () => {
-      hiddenPopup();
+      closePopup();
       getInitiallyImgElement();
     });
+    const handleShowErrorAlerts = (evt) => {
+      if (evt.target.className !== 'error__inner') {
+        if (evt.target.className === 'error__title') {
+          evt.stopImmediatePropagation();
+        } else {
+          closePopup();
+          window.removeEventListener('click', handleShowErrorAlerts);
+        }
+      }
+    };
+    window.addEventListener('click', handleShowErrorAlerts);
   } else {
     body.appendChild(cloneSuccessMessage);
     closePopupByEscape(cloneSuccessMessage);
     cloneSuccessMessage.querySelector('.success__button').addEventListener('click', () => {
-      hiddenPopup();
+      closePopup();
       getInitiallyImgElement();
     });
+    const handleShowSuccessAlerts = (evt) => {
+      if (evt.target.className !== 'success__inner') {
+        if (evt.target.className === 'success__title') {
+          evt.stopImmediatePropagation();
+        } else {
+          closePopup();
+          window.removeEventListener('click', handleShowSuccessAlerts);
+        }
+      }
+    };
+    window.addEventListener('click', handleShowSuccessAlerts);
   }
+
   return body;
 };
 

@@ -1,4 +1,4 @@
-
+import {pristine} from './validate-form.js';
 const uploadLogo = document.querySelector('#upload-file');
 const imageEditor = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
@@ -23,7 +23,7 @@ const changeScale = (value) => {
   controlValue.value = `${value}%`;
 };
 
-const hiddenWindowPublication = () => {
+const closeWindowPublication = () => {
   imageEditor.classList.add('hidden');
   body.classList.remove('modal-open');
   uploadLogo.value = '';
@@ -31,7 +31,7 @@ const hiddenWindowPublication = () => {
 
 const closeDocumentKeydown = (evt) => {
   if (evt.key === 'Escape') {
-    hiddenWindowPublication();
+    closeWindowPublication();
   }
 };
 
@@ -70,10 +70,11 @@ uploadLogo.addEventListener('change', () => {
   imageEditor.classList.remove('hidden');
   body.classList.add('modal-open');
   getInitiallyImgElement();
+  pristine.reset();
 });
 
 uploadCancel.addEventListener('click', () => {
-  hiddenWindowPublication();
+  closeWindowPublication();
 });
 
 
@@ -110,4 +111,4 @@ fieldComments.addEventListener('blur', () => {
   document.addEventListener('keydown', closeDocumentKeydown);
 });
 
-export {hiddenWindowPublication, getInitiallyImgElement};
+export {closeWindowPublication, getInitiallyImgElement};
